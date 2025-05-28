@@ -1,0 +1,23 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Venice_fast_building/Maps/Showcase.umap",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/manche_.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/manche_pomme.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/Oar.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/Oar_PhysicsAsset.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/Oar_Skeleton.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/palme.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/palme_base.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/Paddle.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Paddle/BP_Paddle.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/VRTemplate/Blueprints/VRPawn.uasset",
+				"C:/Users/user/Documents/GitHub/VRSimul/TeamProj/Content/Venice_fast_building/Blueprints/BP_building.uasset"
+			]
+		}
+	]
+}
