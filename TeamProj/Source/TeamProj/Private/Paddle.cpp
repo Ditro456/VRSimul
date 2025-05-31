@@ -87,6 +87,21 @@ void APaddle::Tick(float DeltaTime)
 
             CurrentBoat->ApplyPaddleImpulse(PushForce);
 
+            FVector BoatForward = CurrentBoat->GetActorForwardVector();
+            FVector BoatRight = CurrentBoat->GetActorRightVector();
+
+            float RotationAmount = FVector::DotProduct(PushDir, BoatRight);
+
+            // 방향 판별을 위한 CrossProduct의 Z값 사용
+            FVector Cross = FVector::CrossProduct(BoatForward, PushDir);
+            float Sign = FMath::Sign(Cross.Z);  // +1: 왼쪽, -1: 오른쪽 (좌표계에 따라 반대일 수 있음)
+
+            float YawDelta = Sign * FMath::Abs(RotationAmount) * 1.5f; // 회전 민감도
+            FRotator NewRot = CurrentBoat->GetActorRotation();
+            NewRot.Yaw += YawDelta;
+
+            CurrentBoat->SetActorRotation(NewRot);
+
             if (GEngine)
             {
                 GEngine->AddOnScreenDebugMessage(-1, 0.05f, FColor::Green,
@@ -106,18 +121,21 @@ void APaddle::Tick(float DeltaTime)
         CurrentBoat->ApplyPaddleImpulse(Impulse); // <- 이 부분만 변경됨
     }
     if (CurrentBoat)
-{
-    APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    if (PlayerPawn)
     {
-        FVector BoatLoc = CurrentBoat->GetActorLocation();
-        FVector PawnLoc = PlayerPawn->GetActorLocation();
+        APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+        if (PlayerPawn)
+        {
+            FVector BoatLoc = CurrentBoat->GetActorLocation();
+            FRotator BoatRot = CurrentBoat->GetActorRotation();
 
-        // Z값은 유지하고 X, Y만 따라오게 (위아래 흔들림 방지)
-        FVector NewLocation = FVector(BoatLoc.X, BoatLoc.Y, PawnLoc.Z);
-        PlayerPawn->SetActorLocation(NewLocation);
+            // 플레이어 위치를 보트 위로 이동
+            FVector PawnLoc = PlayerPawn->GetActorLocation();
+            FVector NewLoc = FVector(BoatLoc.X, BoatLoc.Y, PawnLoc.Z); // Z는 유지
+
+            PlayerPawn->SetActorLocation(NewLoc);
+            PlayerPawn->SetActorRotation(FRotator(PawnLoc.Rotation().Pitch, BoatRot.Yaw, PawnLoc.Rotation().Roll));
+        }
     }
-}
 }
 
 
