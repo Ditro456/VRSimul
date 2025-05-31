@@ -4,6 +4,9 @@
 #include "GameFramework/Actor.h"
 #include "Paddle.generated.h"
 
+class USceneComponent;
+class ABoat;
+
 UCLASS()
 class TEAMPROJ_API APaddle : public AActor
 {
@@ -18,19 +21,31 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, Category = "VR Grab")
     void GrabObject(USceneComponent* Controller);
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, Category = "VR Grab")
     void ReleaseObject(USceneComponent* Controller);
 
-protected:
-    USceneComponent* PrimaryHand;
-    USceneComponent* SecondaryHand;
+    virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+    virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 
-    // 블루프린트에서 이름으로 설정한 컴포넌트
+private:
+    UPROPERTY()
     USceneComponent* GrabPointPrimary;
+
+    UPROPERTY()
     USceneComponent* GrabPointSecondary;
 
+    UPROPERTY()
+    USceneComponent* PrimaryHand;
+
+    UPROPERTY()
+    USceneComponent* SecondaryHand;
+
+    UPROPERTY()
+    ABoat* CurrentBoat;
+
     bool bIsTwoHandGrabbing;
+    bool bIsTouchingWater;
 };

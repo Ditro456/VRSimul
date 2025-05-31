@@ -1,83 +1,139 @@
 #include "Paddle.h"
+#include "Boat.h"
 #include "Components/SceneComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "EngineUtils.h"
+#include "Engine/Engine.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/Pawn.h"
 
 APaddle::APaddle()
 {
     PrimaryActorTick.bCanEverTick = true;
+
+    PrimaryHand = nullptr;
+    SecondaryHand = nullptr;
+    bIsTwoHandGrabbing = false;
+    bIsTouchingWater = false;
+    CurrentBoat = nullptr;
 }
 
 void APaddle::BeginPlay()
 {
     Super::BeginPlay();
 
-    // 이름으로 SceneComponent를 찾아 설정
+    // 블루프린트에 배치된 Grab 포인트를 이름으로 찾음
     GrabPointPrimary = Cast<USceneComponent>(GetDefaultSubobjectByName(TEXT("BPPrimaryGrabPoint")));
-    if (!GrabPointPrimary)
-        GrabPointPrimary = FindComponentByClass<USceneComponent>(); // fallback
-
     GrabPointSecondary = Cast<USceneComponent>(GetDefaultSubobjectByName(TEXT("BPSecondaryGrabPoint")));
-    if (!GrabPointSecondary)
-        GrabPointSecondary = FindComponentByClass<USceneComponent>(); // fallback
+
+    if (!GrabPointPrimary || !GrabPointSecondary)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("GrabPoints not found! Check BP_Paddle component names."));
+    }
+
+    // 보트 찾기
+    for (TActorIterator<ABoat> It(GetWorld()); It; ++It)
+    {
+        CurrentBoat = *It;
+        break;
+    }
 }
 
 void APaddle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (!GrabPointPrimary) return;
+    FVector MoveDelta = FVector::ZeroVector;
 
-    if (bIsTwoHandGrabbing && PrimaryHand && SecondaryHand && GrabPointSecondary)
+    // 기존 양손 잡기 기능
+    if (bIsTwoHandGrabbing && PrimaryHand && SecondaryHand && GrabPointPrimary && GrabPointSecondary)
     {
-        FVector HandPos1 = PrimaryHand->GetComponentLocation();
-        FVector HandPos2 = SecondaryHand->GetComponentLocation();
+        FVector Hand1 = PrimaryHand->GetComponentLocation();
+        FVector Hand2 = SecondaryHand->GetComponentLocation();
+        FVector Grab1 = GrabPointPrimary->GetComponentLocation();
+        FVector Grab2 = GrabPointSecondary->GetComponentLocation();
 
-        FVector GrabPos1 = GrabPointPrimary->GetComponentLocation();
-        FVector GrabPos2 = GrabPointSecondary->GetComponentLocation();
+        FVector MidHand = (Hand1 + Hand2) * 0.5f;
+        FVector MidGrab = (Grab1 + Grab2) * 0.5f;
+        MoveDelta = MidHand - MidGrab;
 
-        FVector MidHand = (HandPos1 + HandPos2) * 0.5f;
-        FVector MidGrab = (GrabPos1 + GrabPos2) * 0.5f;
-        FVector MoveDelta = MidHand - MidGrab;
         AddActorWorldOffset(MoveDelta);
 
-        FVector DirHand = (HandPos2 - HandPos1).GetSafeNormal();
-        FVector DirGrab = (GrabPos2 - GrabPos1).GetSafeNormal();
+        FVector DirHand = (Hand2 - Hand1).GetSafeNormal();
+        FVector DirGrab = (Grab2 - Grab1).GetSafeNormal();
         FQuat DeltaRot = FQuat::FindBetweenNormals(DirGrab, DirHand);
         AddActorWorldRotation(DeltaRot);
     }
-    else if (PrimaryHand)
+    else if (PrimaryHand && GrabPointPrimary)
     {
-        FVector HandLoc = PrimaryHand->GetComponentLocation();
-        FVector GrabLoc = GrabPointPrimary->GetComponentLocation();
-        FVector MoveDelta = HandLoc - GrabLoc;
+        MoveDelta = PrimaryHand->GetComponentLocation() - GrabPointPrimary->GetComponentLocation();
         AddActorWorldOffset(MoveDelta);
     }
+
+    // 노가 물에 닿아있고, 보트가 연결되어 있을 때 힘 전달
+    if (bIsTouchingWater && CurrentBoat && !MoveDelta.IsNearlyZero())
+    {
+        // 노가 이동한 방향의 반대 방향으로 힘을 가함 (즉, 노를 뒤로 밀면 배는 앞으로)
+        FVector PushDir = -MoveDelta.GetSafeNormal();
+
+        // 얼마나 움직였는지를 DotProduct로 계산
+        float MovementAmount = FVector::DotProduct(MoveDelta, -PushDir); // 뒤로 밀었을 때만 양수
+        MovementAmount = FMath::Clamp(MovementAmount, 0.0f, 100.0f);     // 당긴 경우 무시
+
+        if (MovementAmount > KINDA_SMALL_NUMBER)
+        {
+            FVector PushForce = PushDir * MovementAmount * 20.0f; // 힘 계수 조절
+            PushForce.Z = 0; // 위로 뜨는 것 방지
+
+            CurrentBoat->ApplyPaddleImpulse(PushForce);
+
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 0.05f, FColor::Green,
+                    FString::Printf(TEXT("PushForce: %s"), *PushForce.ToString()));
+            }
+
+            UE_LOG(LogTemp, Warning, TEXT("Apply Force: %s"), *PushForce.ToString());
+        }
+    }
+    if (bIsTouchingWater && CurrentBoat && !MoveDelta.IsNearlyZero())
+    {
+        FVector PushDir = MoveDelta.GetSafeNormal();
+        float PushAmount = FVector::DotProduct(MoveDelta, PushDir);
+        FVector Impulse = PushDir * PushAmount * 3.5f; // 100~300 사이로 조절
+        Impulse.Z = 0; // 위로 뜨는 거 방지
+
+        CurrentBoat->ApplyPaddleImpulse(Impulse); // <- 이 부분만 변경됨
+    }
+    if (CurrentBoat)
+{
+    APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    if (PlayerPawn)
+    {
+        FVector BoatLoc = CurrentBoat->GetActorLocation();
+        FVector PawnLoc = PlayerPawn->GetActorLocation();
+
+        // Z값은 유지하고 X, Y만 따라오게 (위아래 흔들림 방지)
+        FVector NewLocation = FVector(BoatLoc.X, BoatLoc.Y, PawnLoc.Z);
+        PlayerPawn->SetActorLocation(NewLocation);
+    }
 }
+}
+
 
 void APaddle::GrabObject(USceneComponent* Controller)
 {
-    if (!GrabPointPrimary || !GrabPointSecondary) return;
-
     if (!PrimaryHand)
     {
         PrimaryHand = Controller;
-
-        FTransform HandTransform = Controller->GetComponentTransform();
-        FTransform GrabTransform = GrabPointPrimary->GetComponentTransform();
-        FTransform Delta = UKismetMathLibrary::MakeRelativeTransform(GrabTransform, HandTransform);
-        AddActorWorldTransform(Delta);
     }
     else if (!SecondaryHand && Controller != PrimaryHand)
     {
         SecondaryHand = Controller;
-
-        FTransform HandTransform = Controller->GetComponentTransform();
-        FTransform GrabTransform = GrabPointSecondary->GetComponentTransform();
-        FTransform Delta = UKismetMathLibrary::MakeRelativeTransform(GrabTransform, HandTransform);
-        AddActorWorldTransform(Delta);
-
         bIsTwoHandGrabbing = true;
     }
+
+    UE_LOG(LogTemp, Warning, TEXT("GrabObject called"));
 }
 
 void APaddle::ReleaseObject(USceneComponent* Controller)
@@ -99,5 +155,25 @@ void APaddle::ReleaseObject(USceneComponent* Controller)
         {
             PrimaryHand = nullptr;
         }
+    }
+
+    UE_LOG(LogTemp, Warning, TEXT("ReleaseObject called"));
+}
+
+void APaddle::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+    if (OtherActor && OtherActor->GetName().Contains(TEXT("Water")))
+    {
+        bIsTouchingWater = true;
+        UE_LOG(LogTemp, Warning, TEXT("Touching Water Begin"));
+    }
+}
+
+void APaddle::NotifyActorEndOverlap(AActor* OtherActor)
+{
+    if (OtherActor && OtherActor->GetName().Contains(TEXT("Water")))
+    {
+        bIsTouchingWater = false;
+        UE_LOG(LogTemp, Warning, TEXT("Touching Water End"));
     }
 }

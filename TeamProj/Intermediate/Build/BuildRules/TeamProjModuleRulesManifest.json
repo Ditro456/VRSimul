@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"C:\\Users\\user\\Documents\\GitHub\\VRSimul\\TeamProj\\Source\\TeamProj\\TeamProj.Build.cs",
-		"C:\\Users\\user\\Documents\\GitHub\\VRSimul\\TeamProj\\Source\\TeamProj.Target.cs",
-		"C:\\Users\\user\\Documents\\GitHub\\VRSimul\\TeamProj\\Source\\TeamProjEditor.Target.cs"
+		"D:\\GitHub\\VR\\VRSimul\\TeamProj\\Source\\TeamProj\\TeamProj.Build.cs",
+		"D:\\GitHub\\VR\\VRSimul\\TeamProj\\Source\\TeamProj.Target.cs",
+		"D:\\GitHub\\VR\\VRSimul\\TeamProj\\Source\\TeamProjEditor.Target.cs"
 	],
 	"EngineVersion": "5.3.2"
 }

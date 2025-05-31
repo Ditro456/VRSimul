@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
+	TEAMPROJ_API UClass* Z_Construct_UClass_ABoat_NoRegister();
 	TEAMPROJ_API UClass* Z_Construct_UClass_APaddle();
 	TEAMPROJ_API UClass* Z_Construct_UClass_APaddle_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_TeamProj();
@@ -67,6 +68,7 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_APaddle_GrabObject_Statics::Function_MetaDataParams[] = {
+		{ "Category", "VR Grab" },
 		{ "ModuleRelativePath", "Public/Paddle.h" },
 	};
 #endif
@@ -109,6 +111,7 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_APaddle_ReleaseObject_Statics::Function_MetaDataParams[] = {
+		{ "Category", "VR Grab" },
 		{ "ModuleRelativePath", "Public/Paddle.h" },
 	};
 #endif
@@ -136,6 +139,27 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GrabPointPrimary_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_GrabPointPrimary;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GrabPointSecondary_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_GrabPointSecondary;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PrimaryHand_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PrimaryHand;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SecondaryHand_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_SecondaryHand;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentBoat_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentBoat;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
@@ -145,8 +169,8 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_APaddle_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_APaddle_GrabObject, "GrabObject" }, // 4175711470
-		{ &Z_Construct_UFunction_APaddle_ReleaseObject, "ReleaseObject" }, // 970350167
+		{ &Z_Construct_UFunction_APaddle_GrabObject, "GrabObject" }, // 16727111
+		{ &Z_Construct_UFunction_APaddle_ReleaseObject, "ReleaseObject" }, // 3503228461
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -155,6 +179,47 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 		{ "ModuleRelativePath", "Public/Paddle.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary = { "GrabPointPrimary", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, GrabPointPrimary), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary = { "GrabPointSecondary", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, GrabPointSecondary), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand = { "PrimaryHand", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, PrimaryHand), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand = { "SecondaryHand", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, SecondaryHand), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat_MetaData[] = {
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat = { "CurrentBoat", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, CurrentBoat), Z_Construct_UClass_ABoat_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat_MetaData) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APaddle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_APaddle_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<APaddle>::IsAbstract,
 	};
@@ -164,15 +229,16 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		FuncInfo,
-		nullptr,
+		Z_Construct_UClass_APaddle_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		UE_ARRAY_COUNT(FuncInfo),
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::PropPointers),
 		0,
 		0x009000A4u,
 		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::Class_MetaDataParams), Z_Construct_UClass_APaddle_Statics::Class_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_APaddle()
 	{
 		if (!Z_Registration_Info_UClass_APaddle.OuterSingleton)
@@ -187,15 +253,15 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(APaddle);
 	APaddle::~APaddle() {}
-	struct Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics
+	struct Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_APaddle, APaddle::StaticClass, TEXT("APaddle"), &Z_Registration_Info_UClass_APaddle, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APaddle), 1931343302U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_APaddle, APaddle::StaticClass, TEXT("APaddle"), &Z_Registration_Info_UClass_APaddle, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APaddle), 4237619931U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_3182787156(TEXT("/Script/TeamProj"),
-		Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_3369563803(TEXT("/Script/TeamProj"),
+		Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
