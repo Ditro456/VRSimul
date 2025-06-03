@@ -159,6 +159,16 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentBoat_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentBoat;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsTwoHandGrabbing_MetaData[];
+#endif
+		static void NewProp_bIsTwoHandGrabbing_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsTwoHandGrabbing;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsTouchingWater_MetaData[];
+#endif
+		static void NewProp_bIsTouchingWater_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsTouchingWater;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -213,12 +223,34 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat = { "CurrentBoat", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APaddle, CurrentBoat), Z_Construct_UClass_ABoat_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing_MetaData[] = {
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	void Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing_SetBit(void* Obj)
+	{
+		((APaddle*)Obj)->bIsTwoHandGrabbing = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing = { "bIsTwoHandGrabbing", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(APaddle), &Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater_MetaData[] = {
+		{ "ModuleRelativePath", "Public/Paddle.h" },
+	};
+#endif
+	void Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater_SetBit(void* Obj)
+	{
+		((APaddle*)Obj)->bIsTouchingWater = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater = { "bIsTouchingWater", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(APaddle), &Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater_MetaData), Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APaddle_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointPrimary,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_GrabPointSecondary,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_PrimaryHand,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_SecondaryHand,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_CurrentBoat,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_bIsTwoHandGrabbing,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APaddle_Statics::NewProp_bIsTouchingWater,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_APaddle_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<APaddle>::IsAbstract,
@@ -253,15 +285,15 @@ void EmptyLinkFunctionForGeneratedCodePaddle() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(APaddle);
 	APaddle::~APaddle() {}
-	struct Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_APaddle, APaddle::StaticClass, TEXT("APaddle"), &Z_Registration_Info_UClass_APaddle, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APaddle), 4237619931U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_APaddle, APaddle::StaticClass, TEXT("APaddle"), &Z_Registration_Info_UClass_APaddle, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APaddle), 1782500895U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_3369563803(TEXT("/Script/TeamProj"),
-		Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_3755578984(TEXT("/Script/TeamProj"),
+		Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_GitHub_VRSimul_TeamProj_Source_TeamProj_Public_Paddle_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

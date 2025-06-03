@@ -18,13 +18,13 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
-    // 외부에서 힘(impulse)를 적용하는 함수 (노에서 호출)
     void ApplyPaddleImpulse(FVector Impulse);
 
-private:
-    // 보트의 현재 이동 속도
-    FVector CurrentVelocity;
 
-    // 보트의 감속 계수 (1보다 작아야 감속됨)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Boat")
+    USceneComponent* PlayerAttachPoint;  // ? 선언됨
+
+private:
+    FVector CurrentVelocity;
     float DampingFactor;
 };

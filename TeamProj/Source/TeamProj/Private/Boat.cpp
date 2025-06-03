@@ -1,11 +1,21 @@
 #include "Boat.h"
+#include "Components/SceneComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 ABoat::ABoat()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    CurrentVelocity = FVector::ZeroVector;
-    DampingFactor = 0.97f; // 매 프레임마다 속도가 점차 줄어듦
+    // ? DefaultSceneRoot 생성 및 설정
+    USceneComponent* DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultSceneRoot"));
+    RootComponent = DefaultRoot;
+
+    // ? AttachPoint 생성 및 부착
+    PlayerAttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("PlayerAttachPoint"));
+    PlayerAttachPoint->SetupAttachment(RootComponent);
+
+    // 원하는 위치에 부착 (예: 배 위쪽)
+    PlayerAttachPoint->SetRelativeLocation(FVector(0.f, 0.f, 50.f));
 }
 
 void ABoat::BeginPlay()
@@ -19,13 +29,9 @@ void ABoat::Tick(float DeltaTime)
 
     if (!CurrentVelocity.IsNearlyZero())
     {
-        // 현재 속도만큼 이동
         AddActorWorldOffset(CurrentVelocity * DeltaTime, true);
+        CurrentVelocity *= FMath::Pow(DampingFactor, DeltaTime * 60.0f);
 
-        // 점차 감속
-        CurrentVelocity *= FMath::Pow(DampingFactor, DeltaTime * 60.0f); // 프레임 보정
-
-        // 너무 작으면 정지
         if (CurrentVelocity.SizeSquared() < 0.01f)
         {
             CurrentVelocity = FVector::ZeroVector;
@@ -36,6 +42,6 @@ void ABoat::Tick(float DeltaTime)
 void ABoat::ApplyPaddleImpulse(FVector Impulse)
 {
     CurrentVelocity += Impulse;
-
     UE_LOG(LogTemp, Warning, TEXT("Impulse Applied: %s"), *Impulse.ToString());
 }
+

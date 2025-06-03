@@ -46,6 +46,9 @@ private:
     UPROPERTY()
     ABoat* CurrentBoat;
 
+    UPROPERTY()
     bool bIsTwoHandGrabbing;
+
+    UPROPERTY()
     bool bIsTouchingWater;
 };

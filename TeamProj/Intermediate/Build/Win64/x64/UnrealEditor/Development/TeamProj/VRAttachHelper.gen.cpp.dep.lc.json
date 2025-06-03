@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\user\\documents\\github\\vrsimul\\teamproj\\intermediate\\build\\win64\\unrealeditor\\inc\\teamproj\\uht\\vrattachhelper.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\user\\documents\\github\\vrsimul\\teamproj\\intermediate\\build\\win64\\x64\\teamprojeditor\\development\\engine\\sharedpch.engine.cpp20.inclorderunreal5_0.h.pch",
+        "Includes": [
+            "c:\\users\\user\\documents\\github\\vrsimul\\teamproj\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\teamproj\\definitions.teamproj.h",
+            "c:\\users\\user\\documents\\github\\vrsimul\\teamproj\\source\\teamproj\\public\\vrattachhelper.h",
+            "c:\\users\\user\\documents\\github\\vrsimul\\teamproj\\intermediate\\build\\win64\\unrealeditor\\inc\\teamproj\\uht\\vrattachhelper.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
